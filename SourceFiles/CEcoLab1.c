@@ -112,36 +112,51 @@ uint32_t ECOCALLMETHOD CEcoLab1_Release(/* in */ struct IEcoLab1* me) {
 /*
  *
  * <сводка>
- *   Функция MyFunction
+ *   Функция QuickSort
  * </сводка>
  *
  * <описание>
- *   Функция
+ *   Функция реализует алгоритм быстрой сортировки
  * </описание>
  *
  */
-int16_t ECOCALLMETHOD CEcoLab1_MyFunction(/* in */ struct IEcoLab1* me, /* in */ char_t* Name, /* out */ char_t** copyName) {
+int16_t ECOCALLMETHOD CEcoLab1_QuickSort(/* in */ IEcoLab1* me, int32_t* arr, int32_t low, int32_t high) {
     CEcoLab1* pCMe = (CEcoLab1*)me;
-    int16_t index = 0;
-
-    /* Проверка указателей */
-    if (me == 0 || Name == 0 || copyName == 0) {
+    if (me == 0 || arr == 0) {
         return -1;
     }
 
-    /* Копирование строки */
-    while(Name[index] != 0) {
-        index++;
+    if (low < high) {
+        /* pi is partitioning index, arr[p] is now at right place */
+        int32_t pi = partition(arr, low, high);
+
+        /* Separately sort elements before partition and after partition */
+        CEcoLab1_QuickSort(me, arr, low, pi - 1);
+        CEcoLab1_QuickSort(me, arr, pi + 1, high);
     }
-    pCMe->m_Name = (char_t*)pCMe->m_pIMem->pVTbl->Alloc(pCMe->m_pIMem, index + 1);
-    index = 0;
-    while(Name[index] != 0) {
-        pCMe->m_Name[index] = Name[index];
-        index++;
-    }
-    *copyName = pCMe->m_Name;
 
     return 0;
+}
+
+int32_t partition (int32_t arr[], int32_t low, int32_t high) {
+    int32_t pivot = arr[high];    // pivot
+    int32_t i = (low - 1);  // Index of smaller element
+
+    for (int32_t j = low; j <= high - 1; j++) {
+        // If current element is smaller than or equal to pivot
+        if (arr[j] <= pivot) {
+            i++;    // increment index of smaller element
+            swap(&arr[i], &arr[j]);
+        }
+    }
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
+
+void swap(int32_t* a, int32_t* b) {
+    int32_t t = *a;
+    *a = *b;
+    *b = t;
 }
 
 
@@ -195,7 +210,7 @@ IEcoLab1VTbl g_x277FC00C35624096AFCFC125B94EEC90VTbl = {
     CEcoLab1_QueryInterface,
     CEcoLab1_AddRef,
     CEcoLab1_Release,
-    CEcoLab1_MyFunction
+    CEcoLab1_QuickSort
 };
 
 

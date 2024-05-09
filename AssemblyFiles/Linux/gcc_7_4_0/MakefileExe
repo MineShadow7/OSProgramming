@@ -51,7 +51,7 @@ OUT = $(OUT_TARGET)
 OUT_DIR = ../../../BuildFiles/Linux/x64/$(CONFIG_TARGET)
 
 # C++ compiler flags (-g -O2 -Wall)
-CCFLAGS = $(CCFLAGS_TARGET) -DLINUX -DUGUID_UTILITY -DECO_LINUX 
+CCFLAGS = $(CCFLAGS_TARGET) -DLINUX -DUGUID_UTILITY -DECO_LINUX -Wno-incompatible-pointer-types
 
 # compiler
 GNU =

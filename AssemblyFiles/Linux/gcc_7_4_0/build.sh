@@ -1,5 +1,4 @@
-#!/usr/bin/env bash
-echo "Build Eco.Lab1"
+export ECO_FRAMEWORK=../../../Eco.Framework
 DIR=$(cd "$(dirname "$0")"; pwd)
 echo $DIR
 export TARGET=0

@@ -39,30 +39,13 @@ typedef struct IEcoLab1VTbl {
     uint32_t (ECOCALLMETHOD *Release)(/* in */ struct IEcoLab1* me);
 
     /* IEcoLab1 */
-    int16_t (ECOCALLMETHOD *MyFunction)(/* in */ struct IEcoLab1* me, /* in */ char_t* Name, /* out */ char_t** CopyName);
-
+    int16_t (ECOCALLMETHOD *QuickSort)(/* in */ struct IEcoLab1* me, int32_t* arr, int32_t low, int32_t high);
 
 } IEcoLab1VTbl, *IEcoLab1VTblPtr;
-
-typedef struct IQuickSortVTbl {
-
-    /* IEcoUnknown */
-    uint16_t (ECOCALLMETHOD *QueryInterface)(/* in */ struct IQuickSort* me, /* in */ const UGUID* riid, /* out */ void **ppv);
-    uint32_t (ECOCALLMETHOD *AddRef)(/* in */ struct IQuickSort* me);
-    uint32_t (ECOCALLMETHOD *Release)(/* in */ struct IQuickSort* me);
-
-    /* IEcoLab1 */
-    uint16_t (ECOCALLMETHOD *QuickSort)(/* in */ struct IQuickSort* me, /* in */ char_t* Name, /* out */ char_t** CopyName);
-
-
-} IQuickSortVTbl, *IQuickSortVTblPtr;
 
 interface IEcoLab1 {
     struct IEcoLab1VTbl *pVTbl;
 } IEcoLab1;
 
-interface IQuickSort{
-    struct QuickSortLab1VTbl *pVTbl;
-} IQuickSort;
 
 #endif /* __I_ECOLAB1_H__ */

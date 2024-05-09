@@ -24,7 +24,7 @@
 #include "IdEcoInterfaceBus1.h"
 #include "IdEcoFileSystemManagement1.h"
 #include "IdEcoLab1.h"
-#include "QuickSort.h"
+
 /*
  *
  * <сводка>
@@ -48,6 +48,16 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
     char_t* copyName = 0;
     /* Указатель на тестируемый интерфейс */
     IEcoLab1* pIEcoLab1 = 0;
+    const int32_t SIZE = 42;
+    // Создаем массив для сортировки
+    int32_t array[SIZE];
+    int32_t arraySize = sizeof(array) / sizeof(array[0]);
+
+    // Заполняем массив случайными числами
+    for (int32_t i = 0; i < arraySize; i++) {
+        array[i] = rand() % 100; // Random values between 0 and 99
+    }
+
 
     /* Проверка и создание системного интрефейса */
     if (pISys == 0) {
@@ -95,10 +105,22 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
         goto Release;
     }
 
+    // Выпишем массив до сортировки
+    printf("Перед сортировкой: \n");
+    for (int32_t i = 0; i < arraySize; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
 
-    result = pIEcoLab1->pVTbl->MyFunction(pIEcoLab1, name, &copyName);
+    // Вызываем сортировку
+    result = pIEcoLab1->pVTbl->QuickSort(pIEcoLab1, array, 0, arraySize - 1);
 
-
+    // Выпишем массив после сортировки
+    printf("После сортировки: \n");
+    for (int32_t i = 0; i < arraySize; i++) {
+        printf("%d ", array[i]);
+    }
+    printf("\n");
 
     /* Освлбождение блока памяти */
     pIMem->pVTbl->Free(pIMem, name);

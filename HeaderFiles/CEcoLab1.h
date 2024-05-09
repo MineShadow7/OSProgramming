@@ -21,7 +21,6 @@
 #define __C_ECOLAB1_H__
 
 #include "IEcoLab1.h"
-#include "QuickSort.h"
 #include "IEcoSystem1.h"
 #include "IdEcoMemoryManager1.h"
 
@@ -51,5 +50,7 @@ int16_t ECOCALLMETHOD initCEcoLab1(/*in*/ struct IEcoLab1* me, /* in */ IEcoUnkn
 int16_t ECOCALLMETHOD createCEcoLab1(/* in */ IEcoUnknown* pIUnkSystem, /* in */ IEcoUnknown* pIUnkOuter, /* out */ IEcoLab1** ppIEcoLab1);
 /* Удаление */
 void ECOCALLMETHOD deleteCEcoLab1(/* in */ IEcoLab1* pIEcoLab1);
-
+// Function prototypes
+int32_t partition(int32_t arr[], int32_t low, int32_t high);
+void swap(int32_t* a, int32_t* b);
 #endif /* __C_ECOLAB1_H__ */
