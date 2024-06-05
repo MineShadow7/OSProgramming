@@ -33,7 +33,8 @@ INCLUDES = \
 -I ../../../SharedFiles \
 -I $(ECO_FRAMEWORK)/Eco.Core1/SharedFiles \
 -I $(ECO_FRAMEWORK)/Eco.InterfaceBus1/SharedFiles \
--I $(ECO_FRAMEWORK)/Eco.MemoryManager1/SharedFiles
+-I $(ECO_FRAMEWORK)/Eco.MemoryManager1/SharedFiles \
+-I ../../../Eco.CalculatorC/SharedFiles
 
 OBJ = $(SRC:.c=.o)
 
@@ -41,7 +42,7 @@ OUT = $(OUT_TARGET)
 OUT_DIR = ../../../BuildFiles/Linux/x64/$(CONFIG_TARGET)
 
 # C++ compiler flags (-g -O2 -Wall)
-CCFLAGS = $(CCFLAGS_TARGET) -DECO_LINUX -DUGUID_UTILITY -Wno-incompatible-pointer-types
+CCFLAGS = $(CCFLAGS_TARGET) -DECO_LINUX -DUGUID_UTILITY -Wno-incompatible-pointer-types -Wno-unknown-pragmas
 
 # compiler
 GNU =
@@ -55,7 +56,8 @@ CMD_TARGET=$(CC) -o
 endif
 
 # library paths
-LIBS =-lc -lm -lgcc
+LIBS =-lc -lm -lgcc -ldl -l00000000000000000000000000000100 -l00000000000000000000000042757331 -l0000000000000000000000004D656D31 -l00000000000000000000000046534D31
+
 
 # link flags
 LDFLAGS = $(LDFLAGS_TARGET)

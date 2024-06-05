@@ -24,6 +24,9 @@
 #include "IdEcoInterfaceBus1.h"
 #include "IdEcoFileSystemManagement1.h"
 #include "IdEcoLab1.h"
+#include "../Eco.CalculatorC/SharedFiles/IEcoCalculatorX.h"
+#include "../Eco.CalculatorC/SharedFiles/IEcoCalculatorY.h"
+#include "../Eco.CalculatorC/SharedFiles/IdEcoCalculatorC.h"
 
 /*
  *
@@ -36,6 +39,11 @@
  * </описание>
  *
  */
+IEcoCalculatorX* g_pIX = 0;
+IEcoCalculatorY* g_pIY = 0;
+int8_t g_iInfo = 0;
+
+
 int16_t EcoMain(IEcoUnknown* pIUnk) {
     int16_t result = -1;
     /* Указатель на системный интерфейс */
@@ -59,6 +67,14 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
     }
 
 
+
+
+
+
+
+
+
+
     /* Проверка и создание системного интрефейса */
     if (pISys == 0) {
         result = pIUnk->pVTbl->QueryInterface(pIUnk, &GID_IEcoSystem1, (void **)&pISys);
@@ -77,6 +93,12 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
 #ifdef ECO_LIB
     /* Регистрация статического компонента для работы со списком */
     result = pIBus->pVTbl->RegisterComponent(pIBus, &CID_EcoLab1, (IEcoUnknown*)GetIEcoComponentFactoryPtr_1F5DF16EE1BF43B999A434ED38FE8F3A);
+    if (result != 0 ) {
+        /* Освобождение в случае ошибки */
+        goto Release;
+    }
+    // запомнил
+    result = pIBus->pVTbl->RegisterComponent(pIBus, &CID_EcoCalculatorC, (IEcoUnknown*)GetIEcoComponentFactoryPtr_4828F6552E4540E78121EBD220DC360E);
     if (result != 0 ) {
         /* Освобождение в случае ошибки */
         goto Release;
@@ -104,6 +126,19 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
         /* Освобождение интерфейсов в случае ошибки */
         goto Release;
     }
+    /* Получение интерфейса по работе с умножением и делением у компонента "C" */
+    result = pIBus->pVTbl->QueryComponent(pIBus, &CID_EcoCalculatorC, 0, &IID_IEcoCalculatorY, (void**) &g_pIY);
+    /* Проверка */
+    if (result == 0 && g_pIY != 0) {
+        /* Получение интерфейса по работе со сложением и вычитанием у компонента "C" */
+        result = g_pIY->pVTbl->QueryInterface(g_pIY, &IID_IEcoCalculatorX, (void**) &g_pIX);
+        g_iInfo = 3;
+    }
+
+    printf("%d ", g_pIY->pVTbl->Multiplication(g_pIY, 2, 2));
+    printf("%d ", g_pIX->pVTbl->Addition(g_pIX, 2, 2));
+
+
 
     // Выпишем массив до сортировки
     printf("Перед сортировкой: \n");
