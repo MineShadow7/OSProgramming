@@ -16,7 +16,6 @@
  * </автор>
  *
  */
-
 #include "IEcoSystem1.h"
 #include "IEcoInterfaceBus1.h"
 #include "CEcoCalculatorC.h"

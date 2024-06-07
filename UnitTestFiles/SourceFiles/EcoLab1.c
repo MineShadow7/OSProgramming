@@ -112,7 +112,6 @@ int16_t EcoMain(IEcoUnknown* pIUnk) {
         /* Освобождение системного интерфейса в случае ошибки */
         goto Release;
     }
-
     /* Выделение блока памяти */
     name = (char_t *)pIMem->pVTbl->Alloc(pIMem, 10);
 

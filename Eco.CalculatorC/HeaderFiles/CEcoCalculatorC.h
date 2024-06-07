@@ -16,7 +16,6 @@
  * </автор>
  *
  */
-
 #ifndef __C_ECO_CALCULATOR_C_H__
 #define __C_ECO_CALCULATOR_C_H__
 

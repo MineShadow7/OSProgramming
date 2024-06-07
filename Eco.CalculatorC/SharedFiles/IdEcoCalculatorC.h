@@ -20,7 +20,6 @@
  * </автор>
  *
  */
-
 #ifndef __ID_ECO_CALCULATOR_C_H__
 #define __ID_ECO_CALCULATOR_C_H__
 

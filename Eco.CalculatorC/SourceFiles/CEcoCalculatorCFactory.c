@@ -16,7 +16,6 @@
  * </автор>
  *
  */
-
 #include "CEcoCalculatorC.h"
 #include "CEcoCalculatorCFactory.h"
 

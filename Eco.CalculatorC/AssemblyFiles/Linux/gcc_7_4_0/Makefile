@@ -3,7 +3,6 @@ SRC = \
 ../../../SourceFiles/CEcoCalculatorC.c \
 ../../../SourceFiles/CEcoCalculatorCFactory.c
 
-
 # include directories
 INCLUDES = \
 -I ../../../HeaderFiles \
